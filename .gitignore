@@ -1,0 +1,91 @@
+# =============== #
+# Unity generated #
+# =============== #
+/New Unity Project/
+/temp_name/[Ll]ibrary/
+/temp_name/[Tt]emp/
+/temp_name/[Oo]bj/
+/temp_name/[Bb]uild/
+/temp_name/[Bb]uilds/
+/temp_name/[Ll]ogs/
+!/temp_name/[Aa]ssets/**/*.meta
+/temp_name/Assets/AssetStoreTools*
+/temp_name/UnityPackageManager
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+/temp_name/.consulo/
+/temp_name/.vs/
+/temp_name/ExportedObj/
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+*.tmp
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# ====================== #
+# Gradle cache directory #
+# ====================== #
+/temp_name/.gradle/
+
+# ============================= #
+# Unity3D generated meta files  #
+# ============================= #
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# ======================================== #
+# Unity3D generated file on crash reports  #
+# ======================================== #
+sysinfo.txt
+*.stackdump
+
+# ======================================== #
+# Crashlytics generated file               #
+# ======================================== #
+crashlytics-build.properties
+
+# ==================== #
+# Builds               #
+# ==================== #
+*.apk
+*.unitypackage
+
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+[Tt]humbs.db
+[Dd]esktop.ini
+
+# =============== #
+#      Other      #
+# =============== #
+*.blend1
+*.orig
+*.orig.meta
+*.blend1.meta
+
+# =============== #
+#    Whiteboard   #
+# =============== #
+temp_name/.vs/temp_name/v15/Server/sqlite3/storage.ide
+temp_name/.vs/temp_name/v15/Server/sqlite3/storage.ide-wal
+temp_name/.vs/temp_name/v15/Server/sqlite3/storage.ide-shm
+temp_name/.vs/temp_name/DesignTimeBuild/.dtbcache

@@ -18,8 +18,10 @@ public class MovementController : MonoBehaviour
     private GameController gameController;
     private InputController.InputValues inputValues;
 
-    private float walkValue;
-    private float sprintValue;
+    private float movementSpeed;
+    private float walkValue = .3f;
+    private float sprintValue = .5f;
+    private float crouchValue = .1f;
     private float yClamp;
     private float mouseSensitivity = 100f;
     private float xRotation = 0;
@@ -28,12 +30,15 @@ public class MovementController : MonoBehaviour
     {
         gameController = _gameController;
         Cursor.lockState = CursorLockMode.Locked;
+        movementSpeed = walkValue;
     }
-
-    public void LookUpdate(InputController.InputValues _inputValues)
+    public void UpdateInputs(InputController.InputValues _inputValues)
     {
         inputValues = _inputValues;
-
+        CheckInput();
+    }
+    public void LookUpdate()
+    {
         float mouseY = inputValues.mouseY * mouseSensitivity * Time.deltaTime;
         float mouseX = inputValues.mouseX * mouseSensitivity * Time.deltaTime;
 
@@ -44,21 +49,17 @@ public class MovementController : MonoBehaviour
         playerTransform.Rotate(Vector3.up * mouseX);
     }   
 
-    public void MovementUpdate(InputController.InputValues _inputValues)
+    public void MovementUpdate()
     {
-        inputValues = _inputValues;
-
-        Vector3 moveVector = playerTransform.right * inputValues.horizontal + playerTransform.forward * inputValues.vertical;
+        Vector3 moveVector = playerTransform.right * inputValues.horizontal * movementSpeed + playerTransform.forward * inputValues.vertical * movementSpeed;
         playerCharacterController.Move(moveVector);
-    }
-
-    
+    }    
 
     private void CheckInput()
     {
-        if (inputValues.isLeftMousePressed)
+        if (inputValues.isShiftPressed)
         {
-
+            movementSpeed = sprintValue;
         }
     }
 }

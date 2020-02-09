@@ -12,7 +12,6 @@ public class GameView : BaseView {
     public override void ShowView()
     {
         base.ShowView();
-        mainText.text = "GameView";
     }
 
     public override void HideView()

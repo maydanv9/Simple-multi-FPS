@@ -12,15 +12,12 @@ public class MenuState : BaseState, IMenuView, IMovement
         base.InitState(gameController);
         this.gameController.UIController.MenuView.listener = this;
         this.gameController.UIController.MenuView.ShowView();
-        this.gameController.SceneReferences.MenuTerrain.SetActive(true);
-#if UNITY_EDITOR
-        SetGameState();
-#endif
+        //this.gameController.SceneReferences.MenuTerrain.SetActive(true);
     }
 
     public override void UpdateState(GameController gameController)
     {
-        this.gameController.MovementController.MovementUpdate(inputs);
+        //this.gameController.MovementController.MovementUpdate(inputs);
     }
 
     public override void DeinitState(GameController gameController)
@@ -28,7 +25,7 @@ public class MenuState : BaseState, IMenuView, IMovement
         base.DeinitState(gameController);
         this.gameController.UIController.MenuView.listener = null;
         this.gameController.UIController.MenuView.HideView();
-        this.gameController.SceneReferences.MenuTerrain.SetActive(false);
+        //this.gameController.SceneReferences.MenuTerrain.SetActive(false);
     }
 
     public void SetGameState()

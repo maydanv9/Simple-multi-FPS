@@ -23,6 +23,7 @@ public class GameState : BaseState, IGameView, IMovement
     {
         gameController.InputController.InputUpdate();
         gameController.MovementController.MovementUpdate(inputs);
+        gameController.MovementController.LookUpdate(inputs);
     }
 
     public override void DeinitState(GameController gameController)
@@ -33,7 +34,6 @@ public class GameState : BaseState, IGameView, IMovement
         this.gameController.InputController.movementlistener = this;
         #endregion 
         this.gameController.UIController.GameView.HideView();
-        this.gameController.SceneReferences.MenuTerrain.SetActive(false);
     }
 
     public void SetMenuState()

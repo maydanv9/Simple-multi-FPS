@@ -6,8 +6,8 @@ public class UIController : MonoBehaviour
 {
 
     [SerializeField] private MenuView menuView;
-    public MenuView MenuView { get { return menuView; } }
+    public MenuView MenuView => menuView;
 
     [SerializeField] private GameView gameView;
-    public GameView GameView { get { return gameView; } }
+    public GameView GameView => gameView;
 }

@@ -17,6 +17,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private SceneReferences sceneReferences;
     public SceneReferences SceneReferences => sceneReferences;
 
+    [SerializeField] private WebController webController;
+    public WebController WebController => webController;
 
     private void Awake()
     {

@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\_PROJEKTY\\GameServer\\GameServer.csproj",
+      "projectUniqueName": "E:\\_PROJEKTY\\temp_name\\GameServer\\GameServer.csproj",
       "projectName": "GameServer",
-      "projectPath": "E:\\_PROJEKTY\\GameServer\\GameServer.csproj",
+      "projectPath": "E:\\_PROJEKTY\\temp_name\\GameServer\\GameServer.csproj",
       "packagesPath": "C:\\Users\\Maydan\\.nuget\\packages\\",
-      "outputPath": "E:\\_PROJEKTY\\GameServer\\obj\\",
+      "outputPath": "E:\\_PROJEKTY\\temp_name\\GameServer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Maydan\\AppData\\Roaming\\NuGet\\NuGet.Config",

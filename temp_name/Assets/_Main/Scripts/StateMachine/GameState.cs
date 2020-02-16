@@ -11,12 +11,13 @@ public class GameState : BaseState, IGameView, IMovement
     {
         base.InitState(gameController);
         #region LISTENERS
-        this.gameController.UIController.GameView.listener = this;
-        this.gameController.InputController.movementlistener = this;
+        gameController.UIController.GameView.listener = this;
+        gameController.InputController.movementlistener = this;
         #endregion 
-        this.gameController.UIController.GameView.ShowView();
-        this.gameController.SceneReferences.GameTerrain.SetActive(true);
-        this.gameController.MovementController.Init(gameController);
+        gameController.UIController.GameView.ShowView();
+        gameController.WebController.Client.ConnectToServer();
+        gameController.SceneReferences.GameTerrain.SetActive(true);
+        gameController.MovementController.Init(gameController);
     }
 
     public override void UpdateState(GameController gameController)
@@ -31,10 +32,10 @@ public class GameState : BaseState, IGameView, IMovement
     {
         base.DeinitState(gameController);
         #region LISTENERS
-        this.gameController.UIController.GameView.listener = this;
-        this.gameController.InputController.movementlistener = this;
+        gameController.UIController.GameView.listener = this;
+        gameController.InputController.movementlistener = this;
         #endregion 
-        this.gameController.UIController.GameView.HideView();
+        gameController.UIController.GameView.HideView();
     }
 
     public void SetMenuState()

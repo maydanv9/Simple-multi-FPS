@@ -244,6 +244,7 @@ MonoBehaviour:
   inputController: {fileID: 1893949834}
   movementController: {fileID: 1720071934}
   sceneReferences: {fileID: 1262177648}
+  webController: {fileID: 848725456}
 --- !u!4 &101238630
 Transform:
   m_ObjectHideFlags: 0
@@ -258,6 +259,7 @@ Transform:
   - {fileID: 1893949835}
   - {fileID: 1720071935}
   - {fileID: 1262177649}
+  - {fileID: 848725457}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -468,6 +470,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &848725455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 848725457}
+  - component: {fileID: 848725456}
+  m_Layer: 0
+  m_Name: WebController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &848725456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848725455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e0f9d67c67a1a54bb0cb28f26145b6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  client: {fileID: 1079270413}
+--- !u!4 &848725457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848725455}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 101238630}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,6 +922,7 @@ GameObject:
   - component: {fileID: 1079270411}
   - component: {fileID: 1079270412}
   - component: {fileID: 1079270413}
+  - component: {fileID: 1079270414}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -931,6 +978,18 @@ MonoBehaviour:
   ip: 127.0.0.1
   port: 26950
   myId: 0
+--- !u!114 &1079270414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079270410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3179f0d485105b647be6345a38f1dd84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1244632842
 GameObject:
   m_ObjectHideFlags: 0

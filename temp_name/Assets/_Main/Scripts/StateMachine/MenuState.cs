@@ -13,7 +13,7 @@ public class MenuState : BaseState, IMenuView, IMovement
         base.InitState(gameController);
         gameController.UIController.MenuView.listener = this;
         gameController.UIController.MenuView.ShowView();
-        gameController.WebController.Client.Init();
+        gameController.WebController.Client.Init(gameController);
         //this.gameController.SceneReferences.MenuTerrain.SetActive(true);
     }
 

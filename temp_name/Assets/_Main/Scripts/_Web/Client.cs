@@ -8,18 +8,26 @@ using System;
 public class Client : MonoBehaviour
 {
     public static Client instance;
+
+    public struct ClientData
+    {
+        //TO DO REFACTOR
+    }
     public static int dataBufferSize = 4096;
 
     public string ip = "127.0.0.1";
     public int port = 26950;
     public int myId = 0;
+    public string myLogin;
     public TCP tcp;
 
     private delegate void PacketHandler(Packet _packet);
     private static Dictionary<int, PacketHandler> packetHandlers;
 
-    private void Awake()
+
+    public void Init(GameController gameController)
     {
+        tcp = new TCP();
         if (instance == null)
         {
             instance = this;
@@ -28,10 +36,7 @@ public class Client : MonoBehaviour
         {
             Destroy(this);
         }
-    }
-    public void Init()
-    {
-        tcp = new TCP();
+        instance.myLogin = gameController.UIController.MenuView.Login.text;
     }
 
     public void ConnectToServer()

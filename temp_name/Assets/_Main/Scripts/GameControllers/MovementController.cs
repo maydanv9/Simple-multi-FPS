@@ -11,9 +11,9 @@ using UnityEditor;
 public class MovementController : MonoBehaviour
 {
     [Header("Main")]
-    [SerializeField] private Transform playerTransform;
-    [SerializeField] private Transform mainCamera;
-    [SerializeField] private CharacterController playerCharacterController;
+    //[SerializeField] private Transform playerTransform;
+    //[SerializeField] private Transform mainCamera;
+    //[SerializeField] private CharacterController playerCharacterController;
 
     private GameController gameController;
     private InputController.InputValues inputValues;
@@ -45,14 +45,14 @@ public class MovementController : MonoBehaviour
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        mainCamera.localRotation = Quaternion.Euler(xRotation, 0, 0);
-        playerTransform.Rotate(Vector3.up * mouseX);
+        //mainCamera.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        //playerTransform.Rotate(Vector3.up * mouseX);
     }   
 
     public void MovementUpdate()
     {
-        Vector3 moveVector = playerTransform.right * inputValues.horizontal * movementSpeed + playerTransform.forward * inputValues.vertical * movementSpeed;
-        playerCharacterController.Move(moveVector);
+        //Vector3 moveVector = playerTransform.right * inputValues.horizontal * movementSpeed + playerTransform.forward * inputValues.vertical * movementSpeed;
+        //playerCharacterController.Move(moveVector);
     }    
 
     private void CheckInput()

@@ -6,6 +6,4 @@ public class WebController : MonoBehaviour
 {
     [SerializeField] private Client client;
     public Client Client => client;
-
-
 }

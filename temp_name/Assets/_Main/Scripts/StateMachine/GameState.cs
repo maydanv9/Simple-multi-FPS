@@ -24,6 +24,10 @@ public class GameState : BaseState, IGameView, IMovement
     {
         gameController.InputController.InputUpdate();
         gameController.MovementController.UpdateInputs(inputs);
+        foreach(PlayerController player in gameController.PlayersController.playerControllerList)
+        {
+            player.MyUpdate();
+        }
         gameController.MovementController.MovementUpdate();
         gameController.MovementController.LookUpdate();
     }

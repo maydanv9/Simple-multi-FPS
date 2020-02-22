@@ -41,7 +41,6 @@ public class InputController : MonoBehaviour
         inputs.horizontal = Input.GetAxis(Keys.Inputs.MOVE_HORIZONTAL);
         #endregion
 
-
         movementlistener.UpdateAxis(inputs);
     }
     

@@ -11,8 +11,8 @@ using UnityEditor;
 public class MovementController : MonoBehaviour
 {
     [Header("Main")]
-    //[SerializeField] private Transform playerTransform;
-    //[SerializeField] private Transform mainCamera;
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private Transform mainCamera;
     //[SerializeField] private CharacterController playerCharacterController;
 
     private GameController gameController;
@@ -26,9 +26,10 @@ public class MovementController : MonoBehaviour
     private float mouseSensitivity = 100f;
     private float xRotation = 0;
 
-    public MovementController()
+    public MovementController(Transform _playerTransform, Transform _mainCamera)
     {
-
+        playerTransform = _playerTransform;
+        mainCamera = _mainCamera;
     }
 
     public void Init(GameController _gameController)
@@ -37,11 +38,15 @@ public class MovementController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         movementSpeed = walkValue;
     }
-    public void UpdateInputs(InputController.InputValues _inputValues)
+
+    public void Update(InputController.InputValues _inputValues)
     {
         inputValues = _inputValues;
         CheckInput();
+        LookUpdate();
+        MovementUpdate();
     }
+
     public void LookUpdate()
     {
         float mouseY = inputValues.mouseY * mouseSensitivity * Time.deltaTime;

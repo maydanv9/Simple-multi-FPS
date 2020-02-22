@@ -15,6 +15,7 @@ public class GameState : BaseState, IGameView, IMovement
         gameController.InputController.movementlistener = this;
         #endregion 
         gameController.UIController.GameView.ShowView();
+        gameController.WebController.Client.Init(gameController);
         gameController.WebController.Client.ConnectToServer();
         gameController.SceneReferences.GameTerrain.SetActive(true);
         gameController.MovementController.Init(gameController);
@@ -23,13 +24,14 @@ public class GameState : BaseState, IGameView, IMovement
     public override void UpdateState(GameController gameController)
     {
         gameController.InputController.InputUpdate();
-        gameController.MovementController.UpdateInputs(inputs);
-        foreach(PlayerController player in gameController.PlayersController.playerControllerList)
-        {
-            player.MyUpdate();
-        }
-        gameController.MovementController.MovementUpdate();
-        gameController.MovementController.LookUpdate();
+        gameController.PlayersController.playerControllerList[0].MyUpdate();
+        //gameController.MovementController.UpdateInputs(inputs);
+        //foreach (PlayerController player in gameController.PlayersController.playerControllerList)
+        //{
+        //    player.MyUpdate();
+        //}
+        //gameController.MovementController.MovementUpdate();
+        //gameController.MovementController.LookUpdate();
     }
 
     public override void DeinitState(GameController gameController)

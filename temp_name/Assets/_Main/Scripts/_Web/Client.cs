@@ -30,18 +30,11 @@ public class Client : MonoBehaviour
 
     public void Init(GameController _gameController)
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(this);
-        }
+        instance = this;
         this.gameController = _gameController;
+        instance.myLogin = gameController.UIController.MenuView.Login.text;
         tcp = new TCP();
         udp = new UDP();
-        //instance.myLogin = gameController.UIController.MenuView.Login.text;
     }
 
     public void ConnectToServer()

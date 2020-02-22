@@ -34,8 +34,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        verticalRotation = transform.localEulerAngles.x;
-        horizontalRotation = player.transform.eulerAngles.y;
+        this.verticalRotation = transform.localEulerAngles.x;
+        this.horizontalRotation = player.transform.eulerAngles.y;
     }
 
     private void Look()
@@ -43,12 +43,12 @@ public class PlayerController : MonoBehaviour
         float _mouseVertical = -Input.GetAxis("Mouse Y");
         float _mouseHorizontal = Input.GetAxis("Mouse X");
 
-        verticalRotation += _mouseVertical * sensitivity * Time.deltaTime;
-        horizontalRotation += _mouseHorizontal * sensitivity * Time.deltaTime;
+        this.verticalRotation += _mouseVertical * sensitivity * Time.deltaTime;
+        this.horizontalRotation += _mouseHorizontal * sensitivity * Time.deltaTime;
 
         verticalRotation = Mathf.Clamp(verticalRotation, -clampAngle, clampAngle);
 
-        transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
-        player.transform.rotation = Quaternion.Euler(0f, horizontalRotation, 0f);
+        this.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+        this.player.transform.rotation = Quaternion.Euler(0f, horizontalRotation, 0f);
     }
 }

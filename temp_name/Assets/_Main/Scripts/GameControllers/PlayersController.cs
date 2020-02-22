@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,15 +17,15 @@ public class PlayersController : MonoBehaviour
         if (_id == Client.instance.myId)
         {
             _player = Instantiate(localPlayerPrefab, _position, _rotation);
+            playerControllerList.Add(_player.GetComponent<PlayerController>());
         }
         else
         {
             _player = Instantiate(playerPrefab, _position, _rotation);
         }
-
+        //TO DO: SORT OF INITATION
         _player.GetComponent<PlayerInfoController>().id = _id;
         _player.GetComponent<PlayerInfoController>().username = _username;
         players.Add(_id, _player.GetComponent<PlayerInfoController>());
-        playerControllerList.Add(_player.GetComponent<PlayerController>());
     }
 }

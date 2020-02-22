@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameState : BaseState, IGameView, IMovement
 {
@@ -10,26 +11,25 @@ public class GameState : BaseState, IGameView, IMovement
     public override void InitState(GameController gameController)
     {
         base.InitState(gameController);
+
         #region LISTENERS
         gameController.UIController.GameView.listener = this;
         gameController.InputController.movementlistener = this;
         #endregion 
+
         gameController.UIController.GameView.ShowView();
+        SceneManager.LoadSceneAsync(Keys.Scenes.TERRAIN_SCENE);
         gameController.WebController.Client.Init(gameController);
         gameController.WebController.Client.ConnectToServer();
-        gameController.SceneReferences.GameTerrain.SetActive(true);
         gameController.MovementController.Init(gameController);
+        gameController.PlayersController.Init(gameController);
     }
 
     public override void UpdateState(GameController gameController)
     {
         gameController.InputController.InputUpdate();
-        gameController.PlayersController.playerControllerList[0].MyUpdate();
+        gameController.PlayersController.LocalPlayer.MyUpdate(inputs);
         //gameController.MovementController.UpdateInputs(inputs);
-        //foreach (PlayerController player in gameController.PlayersController.playerControllerList)
-        //{
-        //    player.MyUpdate();
-        //}
         //gameController.MovementController.MovementUpdate();
         //gameController.MovementController.LookUpdate();
     }

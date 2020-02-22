@@ -4,8 +4,22 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private MovementController movementController = new MovementController();
+    public PlayerInfoController player;
 
-    public void MyUpdate()
+    public float sensitivity = 100f;
+    public float clampAngle = 85f;
+
+    private float verticalRotation;
+    private float horizontalRotation;
+
+    private void Start()
+    {
+        this.verticalRotation = transform.localEulerAngles.x;
+        this.horizontalRotation = player.transform.eulerAngles.y;
+    }
+
+    public void MyUpdate(InputController.InputValues _inputValues)
     {
         Look();
         Debug.DrawRay(transform.position, transform.forward * 2, Color.red);
@@ -23,19 +37,6 @@ public class PlayerController : MonoBehaviour
         };
 
         ClientSend.PlayerMovement(_inputs);
-    }
-
-    public PlayerInfoController player;
-    public float sensitivity = 100f;
-    public float clampAngle = 85f;
-
-    private float verticalRotation;
-    private float horizontalRotation;
-
-    private void Start()
-    {
-        this.verticalRotation = transform.localEulerAngles.x;
-        this.horizontalRotation = player.transform.eulerAngles.y;
     }
 
     private void Look()

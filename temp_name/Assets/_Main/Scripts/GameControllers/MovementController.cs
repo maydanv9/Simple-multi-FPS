@@ -26,6 +26,11 @@ public class MovementController : MonoBehaviour
     private float mouseSensitivity = 100f;
     private float xRotation = 0;
 
+    public MovementController()
+    {
+
+    }
+
     public void Init(GameController _gameController)
     {
         gameController = _gameController;

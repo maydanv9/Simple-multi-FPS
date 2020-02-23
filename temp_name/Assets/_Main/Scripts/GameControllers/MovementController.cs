@@ -13,7 +13,7 @@ public class MovementController : MonoBehaviour
     [Header("Main")]
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform mainCamera;
-    //[SerializeField] private CharacterController playerCharacterController;
+    //[SerializeField] private CharacterControllerd playerCharacterController;
 
     private GameController gameController;
     private InputController.InputValues inputValues;
@@ -39,7 +39,7 @@ public class MovementController : MonoBehaviour
         movementSpeed = walkValue;
     }
 
-    public void Update(InputController.InputValues _inputValues)
+    public void MyUpdate(InputController.InputValues _inputValues)
     {
         inputValues = _inputValues;
         CheckInput();

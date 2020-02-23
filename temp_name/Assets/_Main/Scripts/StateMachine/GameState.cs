@@ -18,7 +18,7 @@ public class GameState : BaseState, IGameView, IMovement
         #endregion 
 
         gameController.UIController.GameView.ShowView();
-        SceneManager.LoadSceneAsync(Keys.Scenes.TERRAIN_SCENE);
+        //SceneManager.LoadSceneAsync(Keys.Scenes.TERRAIN_SCENE);
         gameController.WebController.Client.Init(gameController);
         gameController.WebController.Client.ConnectToServer();
         gameController.MovementController.Init(gameController);

@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     public void MyUpdate(InputController.InputValues _inputValues)
     {
-        movementController.Update(_inputValues);
+        movementController.MyUpdate(_inputValues);
         Look();
         Debug.DrawRay(transform.position, transform.forward * 2, Color.red);
         SendInputToServer();

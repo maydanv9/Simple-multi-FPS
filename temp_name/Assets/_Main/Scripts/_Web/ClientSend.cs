@@ -22,7 +22,6 @@ public class ClientSend : MonoBehaviour
         using (Packet _packet = new Packet((int)ClientPackets.welcomeReceived))
         {
             _packet.Write(Client.instance.myId);
-            Debug.LogError(Client.instance.myLogin);
             _packet.Write(Client.instance.myLogin);
 
             SendTCPData(_packet);

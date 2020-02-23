@@ -28,7 +28,7 @@ public class GameState : BaseState, IGameView, IMovement
     public override void UpdateState(GameController gameController)
     {
         gameController.InputController.InputUpdate();
-        gameController.PlayersController.LocalPlayer.MyUpdate(inputs);
+        gameController.PlayersController.LocalPlayer?.MyUpdate(inputs);
         //gameController.MovementController.UpdateInputs(inputs);
         //gameController.MovementController.MovementUpdate();
         //gameController.MovementController.LookUpdate();

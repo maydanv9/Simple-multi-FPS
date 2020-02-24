@@ -25,7 +25,6 @@ public class ClientHandle : MonoBehaviour
         Quaternion _rotation = _packet.ReadQuaternion();
 
         GameController.gameControllerInstance.PlayersController.SpawnPlayer(_id, _username, _position, _rotation);
-
     }
 
     public static void PlayerPosition(Packet _packet)

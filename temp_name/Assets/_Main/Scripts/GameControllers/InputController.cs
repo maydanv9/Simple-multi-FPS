@@ -5,10 +5,16 @@ using UnityEngine;
 public class InputController : MonoBehaviour
 {
     public IMovement movementlistener;
-    private InputValues inputs = new InputValues();
+    [SerializeField] private InputValues inputs = new InputValues();
+
+    [System.Serializable]
     public struct InputValues
     {
         public bool isEscPressed;
+        public bool isWPressed;
+        public bool isSPressed;
+        public bool isAPressed;
+        public bool isDPressed;
         public bool isRightMousePressed;
         public bool isLeftMousePressed;
         public bool isCtrlPressed;
@@ -27,6 +33,11 @@ public class InputController : MonoBehaviour
         inputs.isCtrlPressed = Input.GetKeyDown(KeyCode.LeftControl);
         inputs.isShiftPressed = Input.GetKeyDown(KeyCode.LeftShift);
         inputs.isSpacePressed = Input.GetKeyDown(KeyCode.Space);
+        inputs.isWPressed = Input.GetKey(KeyCode.W);
+        inputs.isSPressed = Input.GetKey(KeyCode.S);
+        inputs.isAPressed = Input.GetKey(KeyCode.A);
+        inputs.isDPressed = Input.GetKey(KeyCode.D);
+        Input.GetKey(KeyCode.Space);
         #endregion
 
         #region MOUSE

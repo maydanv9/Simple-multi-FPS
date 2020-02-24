@@ -31,6 +31,7 @@ public class PlayersController : MonoBehaviour
         }
 
         localPlayer = _player.GetComponent<PlayerController>();
+        localPlayer.Init();
         //TO DO: SORT OF INITATION
         _player.GetComponent<PlayerInfoController>().id = _id;
         _player.GetComponent<PlayerInfoController>().username = _username;

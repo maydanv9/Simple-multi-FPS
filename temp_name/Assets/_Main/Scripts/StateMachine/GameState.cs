@@ -18,7 +18,6 @@ public class GameState : BaseState, IGameView, IMovement
         #endregion 
 
         gameController.UIController.GameView.ShowView();
-        //SceneManager.LoadSceneAsync(Keys.Scenes.TERRAIN_SCENE);
         gameController.WebController.Client.Init(gameController);
         gameController.WebController.Client.ConnectToServer();
         gameController.MovementController.Init(gameController);
@@ -29,9 +28,6 @@ public class GameState : BaseState, IGameView, IMovement
     {
         gameController.InputController.InputUpdate();
         gameController.PlayersController.LocalPlayer?.MyUpdate(inputs);
-        //gameController.MovementController.UpdateInputs(inputs);
-        //gameController.MovementController.MovementUpdate();
-        //gameController.MovementController.LookUpdate();
     }
 
     public override void DeinitState(GameController gameController)

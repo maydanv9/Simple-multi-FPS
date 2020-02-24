@@ -5,59 +5,40 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Camera playerCamera;
-    private MovementController movementController;
-
-    public float sensitivity = 100f;
-    public float clampAngle = 85f;
-
-    private float verticalRotation;
-    private float horizontalRotation;
-
-    //TO GET RID OF
-    private void Start()
-    {
-        this.verticalRotation = transform.localEulerAngles.x;
-        this.horizontalRotation = this.transform.eulerAngles.y;
-    }
+    [SerializeField] private MovementController movementController;
+    private InputController.InputValues inputValues = new InputController.InputValues();
 
     public void Init()
     {
         movementController = new MovementController(this.transform, playerCamera.transform);
     }
-
+        
     public void MyUpdate(InputController.InputValues _inputValues)
     {
-        //movementController.MyUpdate(_inputValues);
-        Look();
+        movementController.MyUpdate(_inputValues);
         Debug.DrawRay(transform.position, transform.forward * 2, Color.red);
-        SendInputToServer();
+        SendInputToServer(_inputValues);
     }
 
-    private void SendInputToServer()
+    private void SendInputToServer(InputController.InputValues _inputValues)
     {
         bool[] _inputs = new bool[]
         {
-            Input.GetKey(KeyCode.W),
-            Input.GetKey(KeyCode.S),
-            Input.GetKey(KeyCode.A),
-            Input.GetKey(KeyCode.D),
-            Input.GetKey(KeyCode.Space),
+            _inputValues.isWPressed,
+            _inputValues.isSPressed,
+            _inputValues.isAPressed,
+            _inputValues.isDPressed,
+            _inputValues.isSpacePressed,
+            _inputValues.isCtrlPressed,
+            _inputValues.isShiftPressed,
         };
 
-        ClientSend.PlayerMovement(_inputs);
-    }
+        float[] inputFloats = new float[]
+        {
+            _inputValues.vertical,
+            _inputValues.horizontal,
+        };
 
-    private void Look()
-    {
-        float _mouseVertical = -Input.GetAxis("Mouse Y");
-        float _mouseHorizontal = Input.GetAxis("Mouse X");
-
-        this.verticalRotation += _mouseVertical * sensitivity * Time.deltaTime;
-        this.horizontalRotation += _mouseHorizontal * sensitivity * Time.deltaTime;
-
-        verticalRotation = Mathf.Clamp(verticalRotation, -clampAngle, clampAngle);
-
-        this.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
-        this.transform.rotation = Quaternion.Euler(0f, horizontalRotation, 0f);
+        ClientSend.PlayerMovement(_inputs, inputFloats);
     }
 }

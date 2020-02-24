@@ -28,7 +28,7 @@ public class ClientSend : MonoBehaviour
         }
     }
 
-    public static void PlayerMovement(bool[] _inputs)
+    public static void PlayerMovement(bool[] _inputs, float[] _inputsFloats)
     {
         using (Packet _packet = new Packet((int)ClientPackets.playerMovement))
         {
@@ -37,6 +37,13 @@ public class ClientSend : MonoBehaviour
             {
                 _packet.Write(_input);
             }
+
+            _packet.Write(_inputsFloats.Length);
+            foreach (float _inputFloat in _inputsFloats)
+            {
+                _packet.Write(_inputFloat);
+            }
+
             _packet.Write(GameController.gameControllerInstance.PlayersController.players[Client.instance.myId].transform.rotation);
 
             SendUDPData(_packet);

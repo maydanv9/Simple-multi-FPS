@@ -24,6 +24,13 @@ public class ServerHandle
         {
             _inputs[i] = _packet.ReadBool();
         }
+
+        float[] _inputsFloats = new float[_packet.ReadFloat()];
+        for (int i = 0; i < _inputsFloats.Length; i++)
+        {
+            _inputsFloats[i] = _packet.ReadFloat();
+        }
+
         Quaternion _rotation = _packet.ReadQuaternion();
 
         Server.clients[_fromClient].player.SetInput(_inputs, _rotation);

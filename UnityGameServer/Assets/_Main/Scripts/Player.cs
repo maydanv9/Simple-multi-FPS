@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
         id = _id;
         username = _username;
 
-        inputs = new bool[5];
+        inputs = new bool[10];
     }
 
     /// <summary>Processes player input and moves the player.</summary>

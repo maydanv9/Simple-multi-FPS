@@ -13,6 +13,7 @@ public class PlayersController : MonoBehaviour
 
     private PlayerController localPlayer;
     public PlayerController LocalPlayer => localPlayer;
+
     public void Init(GameController _gameController)
     {
         this.gameController = _gameController;

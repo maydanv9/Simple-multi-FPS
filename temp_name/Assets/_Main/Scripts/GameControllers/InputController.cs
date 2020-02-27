@@ -10,16 +10,13 @@ public class InputController : MonoBehaviour
     [System.Serializable]
     public struct InputValues
     {
-        public bool isEscPressed;
-        public bool isWPressed;
-        public bool isSPressed;
-        public bool isAPressed;
-        public bool isDPressed;
-        public bool isRightMousePressed;
-        public bool isLeftMousePressed;
+        public bool isSpacePressed;
         public bool isCtrlPressed;
         public bool isShiftPressed;
-        public bool isSpacePressed;
+
+        public bool isEscPressed;
+        public bool isRightMousePressed;
+        public bool isLeftMousePressed;
 
         public float mouseX;
         public float mouseY;
@@ -30,14 +27,9 @@ public class InputController : MonoBehaviour
     {
         #region KEYBOARD
         inputs.isEscPressed = Input.GetKeyDown(KeyCode.Escape);
-        inputs.isCtrlPressed = Input.GetKeyDown(KeyCode.LeftControl);
-        inputs.isShiftPressed = Input.GetKeyDown(KeyCode.LeftShift);
+        inputs.isCtrlPressed = Input.GetKey(KeyCode.LeftControl);
+        inputs.isShiftPressed = Input.GetKey(KeyCode.LeftShift);
         inputs.isSpacePressed = Input.GetKeyDown(KeyCode.Space);
-        inputs.isWPressed = Input.GetKey(KeyCode.W);
-        inputs.isSPressed = Input.GetKey(KeyCode.S);
-        inputs.isAPressed = Input.GetKey(KeyCode.A);
-        inputs.isDPressed = Input.GetKey(KeyCode.D);
-        Input.GetKey(KeyCode.Space);
         #endregion
 
         #region MOUSE

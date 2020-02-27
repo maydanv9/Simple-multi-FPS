@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ServerHandle
 {
+
     public static void WelcomeReceived(int _fromClient, Packet _packet)
     {
         int _clientIdCheck = _packet.ReadInt();
@@ -25,7 +26,7 @@ public class ServerHandle
             _inputs[i] = _packet.ReadBool();
         }
 
-        float[] _inputsFloats = new float[_packet.ReadFloat()];
+        float[] _inputsFloats = new float[_packet.ReadInt()];
         for (int i = 0; i < _inputsFloats.Length; i++)
         {
             _inputsFloats[i] = _packet.ReadFloat();
@@ -33,6 +34,6 @@ public class ServerHandle
 
         Quaternion _rotation = _packet.ReadQuaternion();
 
-        Server.clients[_fromClient].player.SetInput(_inputs, _rotation);
+        Server.clients[_fromClient].player.SetInput(_inputs, _rotation, _inputsFloats);
     }
 }

@@ -111,6 +111,7 @@ public class ServerSend
         {
             _packet.Write(_player.id);
             _packet.Write(_player.transform.position);
+            _packet.Write(_player.AnimationStatus);
 
             SendUDPDataToAll(_packet);
         }

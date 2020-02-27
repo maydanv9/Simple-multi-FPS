@@ -4,21 +4,35 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public struct InputValues
+    {
+        public float mouseX;
+        public float mouseY;
+        public float vertical;
+        public float horizontal;
+    }
+
     public int id;
     public string username;
 
     public CharacterController controller;
-    public float gravity = -9.81f;
-    public float moveSpeed = 5f;
-    public float jumpSpeed = 5f;
+    private float gravity = -20f;
+    public float speed;
+    private float moveSpeed = .5f;
+    private float runSpeed = 1f;
+    private float crouchSpeed = .2f;
+    private float jumpSpeed = 10f;
+
+    private int animationStatus;
+    public int AnimationStatus => animationStatus;
 
     private bool[] inputs;
     private float yVelocity = 0;
-
+    private InputValues inputValues;
     private void Start()
     {
         gravity *= Time.fixedDeltaTime * Time.fixedDeltaTime;
-        moveSpeed *= Time.fixedDeltaTime;
+        //moveSpeed *= Time.fixedDeltaTime;
         jumpSpeed *= Time.fixedDeltaTime;
     }
 
@@ -26,53 +40,57 @@ public class Player : MonoBehaviour
     {
         id = _id;
         username = _username;
-
-        inputs = new bool[10];
+        inputValues = new InputValues();
+        inputs = new bool[3];
     }
 
     /// <summary>Processes player input and moves the player.</summary>
     public void FixedUpdate()
     {
-        Vector2 _inputDirection = Vector2.zero;
-        if (inputs[0])
-        {
-            _inputDirection.y += 1;
-        }
-        if (inputs[1])
-        {
-            _inputDirection.y -= 1;
-        }
-        if (inputs[2])
-        {
-            _inputDirection.x -= 1;
-        }
-        if (inputs[3])
-        {
-            _inputDirection.x += 1;
-        }
-
-        Move(_inputDirection);
+        Move(inputs, inputValues);
     }
 
     /// <summary>Calculates the player's desired movement direction and moves him.</summary>
     /// <param name="_inputDirection"></param>
-    private void Move(Vector2 _inputDirection)
+    private void Move(bool[] _inputs, InputValues inputValues)
     {
-        Vector3 _moveDirection = transform.right * _inputDirection.x + transform.forward * _inputDirection.y;
-        _moveDirection *= moveSpeed;
+        if (_inputs[Keys.Controls.IS_SHIFT_PPRESSED])
+        {
+            speed = runSpeed;
+            animationStatus = Keys.Animations.ANIMATION_RUNNING;
+        }
+        else if (_inputs[Keys.Controls.IS_CTRL_PPRESSED])
+        {
+            speed = crouchSpeed;
+            animationStatus = Keys.Animations.ANIMATION_CROUCHING;
+        }
+        else
+        {
+            speed = moveSpeed;
+            animationStatus = Keys.Animations.ANIMATION_WALKING;
+        }
+
+        if(inputValues.horizontal == 0 && inputValues.vertical == 0)
+        {
+            animationStatus = Keys.Animations.ANIMATION_IDLE;
+        }
+
+        Vector3 moveVector = transform.right * inputValues.horizontal * speed + transform.forward * inputValues.vertical * speed;
+
         if (controller.isGrounded)
         {
             yVelocity = 0f;
-            if (inputs[4])
+            if (_inputs[Keys.Controls.IS_SPACE_PPRESSED])
             {
                 yVelocity = jumpSpeed;
             }
         }
-        yVelocity += gravity;
-        _moveDirection.y = yVelocity;
-        transform.position += _moveDirection * moveSpeed;
 
-        controller.Move(_moveDirection);
+        yVelocity += gravity;
+        moveVector.y = yVelocity;
+        transform.position += moveVector;
+
+        controller.Move(moveVector);
 
         ServerSend.PlayerPosition(this);
         ServerSend.PlayerRotation(this);
@@ -81,8 +99,10 @@ public class Player : MonoBehaviour
     /// <summary>Updates the player input with newly received input.</summary>
     /// <param name="_inputs">The new key inputs.</param>
     /// <param name="_rotation">The new rotation.</param>
-    public void SetInput(bool[] _inputs, Quaternion _rotation)
+    public void SetInput(bool[] _inputs, Quaternion _rotation, float[] _inputsFloats)
     {
+        inputValues.vertical = _inputsFloats[0];
+        inputValues.horizontal = _inputsFloats[1];
         inputs = _inputs;
         transform.rotation = _rotation;
     }

@@ -24,10 +24,6 @@ public class PlayerController : MonoBehaviour
     {
         bool[] _inputs = new bool[]
         {
-            _inputValues.isWPressed,
-            _inputValues.isSPressed,
-            _inputValues.isAPressed,
-            _inputValues.isDPressed,
             _inputValues.isSpacePressed,
             _inputValues.isCtrlPressed,
             _inputValues.isShiftPressed,

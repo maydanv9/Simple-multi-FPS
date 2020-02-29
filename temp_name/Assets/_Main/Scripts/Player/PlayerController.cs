@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
             _inputValues.isSpacePressed,
             _inputValues.isCtrlPressed,
             _inputValues.isShiftPressed,
+            _inputValues.isLeftMousePressed,
+            _inputValues.isRightMousePressed,
         };
 
         float[] inputFloats = new float[]

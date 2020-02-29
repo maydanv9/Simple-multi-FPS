@@ -31,9 +31,7 @@ public class ClientHandle : MonoBehaviour
     {
         int _id = _packet.ReadInt();
         Vector3 _position = _packet.ReadVector3();
-        int _animationStatus = _packet.ReadInt();
         GameController.gameControllerInstance.PlayersController.players[_id].transform.position = _position;
-        GameController.gameControllerInstance.PlayersController.players[_id].animationStatus = _animationStatus;
     }
 
     public static void PlayerRotation(Packet _packet)
@@ -41,5 +39,14 @@ public class ClientHandle : MonoBehaviour
         int _id = _packet.ReadInt();
         Quaternion _rotation = _packet.ReadQuaternion();
         GameController.gameControllerInstance.PlayersController.players[_id].transform.rotation = _rotation; 
+    }
+
+    public static void PlayerAnimation(Packet _packet)
+    {
+        int _id = _packet.ReadInt();
+        string _playerAnimation = _packet.ReadString();
+        string _playerStatus = _packet.ReadString();
+        GameController.gameControllerInstance.PlayersController.players[_id].playerAnimation = _playerAnimation;
+        GameController.gameControllerInstance.PlayersController.players[_id].playerStatus = _playerStatus;
     }
 }

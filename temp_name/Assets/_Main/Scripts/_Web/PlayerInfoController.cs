@@ -6,5 +6,6 @@ public class PlayerInfoController : MonoBehaviour
 {
     public int id;
     public string username;
-    public int animationStatus;
+    public string playerAnimation;
+    public string playerStatus;
 }

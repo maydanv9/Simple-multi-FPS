@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Keys
 {
-    public const int TICKS_PER_SEC = 30; // How many ticks per second
+    public const int TICKS_PER_SEC = 45; // How many ticks per second
     public const float MS_PER_TICK = 1000f / TICKS_PER_SEC; // How many milliseconds per tick
 
     public class Controls
@@ -12,16 +12,22 @@ public class Keys
         public const int IS_SPACE_PPRESSED = 0;
         public const int IS_CTRL_PPRESSED = 1;
         public const int IS_SHIFT_PPRESSED = 2;
+        public const int IS_LMB_PPRESSED = 3;
+        public const int IS_RMB_PPRESSED = 4;
     }
 
-    public class Animations
+    public class PlayerStatus
     {
-        public const int ANIMATION_IDLE = 0;
-        public const int ANIMATION_WALKING = 1;
-        public const int ANIMATION_RUNNING = 2;
-        public const int ANIMATION_JUMPING = 3;
-        public const int ANIMATION_CROUCHING = 4;
-        public const int ANIMATION_CROUCHING_IDLE = 5;
-        public const int ANIMATION_CROUCHING_WALK = 6;
+        public const string ANIMATION_WALKING = "WALKING";
+        public const string ANIMATION_RUNNING = "RUNNING";
+        public const string ANIMATION_JUMPING = "JUMPING";
+        public const string ANIMATION_CROUCHING = "CROUCHING";
     }
+
+    public class PlayerAnimation
+    {
+        public const string ANIMATION_SHOOT = "SHOOTING";
+        public const string ANIMATION_IDLE = "IDLE";
+    }
+
 }

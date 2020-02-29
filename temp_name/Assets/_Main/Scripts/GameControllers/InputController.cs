@@ -33,8 +33,8 @@ public class InputController : MonoBehaviour
         #endregion
 
         #region MOUSE
-        inputs.isRightMousePressed = Input.GetMouseButtonDown(Keys.Inputs.RIGHT_MOUSE_CLICKED);
-        inputs.isLeftMousePressed = Input.GetMouseButtonDown(Keys.Inputs.LEFT_MOUSE_CLICKED);
+        inputs.isRightMousePressed = Input.GetMouseButton(Keys.Inputs.RIGHT_MOUSE_CLICKED);
+        inputs.isLeftMousePressed = Input.GetMouseButton(Keys.Inputs.LEFT_MOUSE_CLICKED);
         #endregion
 
         #region MOVEMENT

@@ -23,8 +23,11 @@ public class Player : MonoBehaviour
     private float crouchSpeed = .2f;
     private float jumpSpeed = 10f;
 
-    private int animationStatus;
-    public int AnimationStatus => animationStatus;
+    private string playerStatus;
+    public string PlayerStatus => playerStatus;
+
+    private string playerAnimation;
+    public string PlayerAnimation => playerAnimation;
 
     private bool[] inputs;
     private float yVelocity = 0;
@@ -41,39 +44,21 @@ public class Player : MonoBehaviour
         id = _id;
         username = _username;
         inputValues = new InputValues();
-        inputs = new bool[3];
+        inputs = new bool[5];
     }
 
     /// <summary>Processes player input and moves the player.</summary>
     public void FixedUpdate()
     {
         Move(inputs, inputValues);
+        Debug.Log("Player: " + id + " has status:" + playerStatus);
     }
 
     /// <summary>Calculates the player's desired movement direction and moves him.</summary>
     /// <param name="_inputDirection"></param>
     private void Move(bool[] _inputs, InputValues inputValues)
     {
-        if (_inputs[Keys.Controls.IS_SHIFT_PPRESSED])
-        {
-            speed = runSpeed;
-            animationStatus = Keys.Animations.ANIMATION_RUNNING;
-        }
-        else if (_inputs[Keys.Controls.IS_CTRL_PPRESSED])
-        {
-            speed = crouchSpeed;
-            animationStatus = Keys.Animations.ANIMATION_CROUCHING;
-        }
-        else
-        {
-            speed = moveSpeed;
-            animationStatus = Keys.Animations.ANIMATION_WALKING;
-        }
-
-        if(inputValues.horizontal == 0 && inputValues.vertical == 0)
-        {
-            animationStatus = Keys.Animations.ANIMATION_IDLE;
-        }
+        PlayerStatusCheck(_inputs);
 
         Vector3 moveVector = transform.right * inputValues.horizontal * speed + transform.forward * inputValues.vertical * speed;
 
@@ -90,10 +75,44 @@ public class Player : MonoBehaviour
         moveVector.y = yVelocity;
         transform.position += moveVector;
 
-        controller.Move(moveVector);
+        this.controller.Move(moveVector);
 
         ServerSend.PlayerPosition(this);
         ServerSend.PlayerRotation(this);
+        ServerSend.PlayerAnimation(this);
+    }
+
+    private void PlayerStatusCheck(bool[] _inputs)
+    {
+        //CHECK MOVEMENT
+        if (_inputs[Keys.Controls.IS_SHIFT_PPRESSED])
+        {
+            speed = runSpeed;
+            playerStatus = Keys.PlayerStatus.ANIMATION_RUNNING;
+        }
+        else if (_inputs[Keys.Controls.IS_CTRL_PPRESSED])
+        {
+            speed = crouchSpeed;
+            playerStatus = Keys.PlayerStatus.ANIMATION_CROUCHING;
+        }
+        else
+        {
+            speed = moveSpeed;
+            playerStatus = Keys.PlayerStatus.ANIMATION_WALKING;
+        } 
+
+        if (inputValues.horizontal == 0 && inputValues.vertical == 0)
+        {
+            playerAnimation = Keys.PlayerAnimation.ANIMATION_IDLE;
+            playerStatus = Keys.PlayerStatus.ANIMATION_WALKING;
+            speed = moveSpeed;
+        }
+
+        //CHECK MOUSE
+        if (_inputs[Keys.Controls.IS_LMB_PPRESSED])
+        {
+            playerAnimation = Keys.PlayerAnimation.ANIMATION_SHOOT;
+        } else playerAnimation = Keys.PlayerAnimation.ANIMATION_IDLE;
     }
 
     /// <summary>Updates the player input with newly received input.</summary>

@@ -111,7 +111,6 @@ public class ServerSend
         {
             _packet.Write(_player.id);
             _packet.Write(_player.transform.position);
-            _packet.Write(_player.AnimationStatus);
 
             SendUDPDataToAll(_packet);
         }
@@ -127,6 +126,17 @@ public class ServerSend
             _packet.Write(_player.transform.rotation);
 
             SendUDPDataToAll(_player.id, _packet);
+        }
+    }
+
+    public static void PlayerAnimation(Player _player)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.playerAnimation))
+        {
+            _packet.Write(_player.id);
+            _packet.Write(_player.PlayerAnimation);
+            _packet.Write(_player.PlayerStatus);
+            SendUDPDataToAll(_packet);
         }
     }
     #endregion

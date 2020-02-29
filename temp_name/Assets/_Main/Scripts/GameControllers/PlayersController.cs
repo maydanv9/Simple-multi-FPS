@@ -25,14 +25,15 @@ public class PlayersController : MonoBehaviour
         if (_id == Client.instance.myId)
         {
             _player = Instantiate(localPlayerPrefab, _position, _rotation, gameController.SceneReferences.PlayersTransform);
+            localPlayer = _player.GetComponent<PlayerController>();
+            localPlayer.Init();
         }
         else
         {
             _player = Instantiate(playerPrefab, _position, _rotation, gameController.SceneReferences.PlayersTransform);
         }
 
-        localPlayer = _player.GetComponent<PlayerController>();
-        localPlayer.Init();
+
         //TO DO: SORT OF INITATION
         _player.GetComponent<PlayerInfoController>().id = _id;
         _player.GetComponent<PlayerInfoController>().username = _username;

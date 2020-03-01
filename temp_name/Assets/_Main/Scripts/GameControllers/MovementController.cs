@@ -17,11 +17,6 @@ public class MovementController : MonoBehaviour
     private GameController gameController;
     private InputController.InputValues inputValues;
 
-    private float movementSpeed;
-    private float walkValue = .3f;
-    private float sprintValue = .5f;
-    private float crouchValue = .1f;
-    private float yClamp;
     private float mouseSensitivity = 100f;
     private float xRotation = 0;
 
@@ -35,14 +30,12 @@ public class MovementController : MonoBehaviour
     {
         gameController = _gameController;
         Cursor.lockState = CursorLockMode.Locked;
-        movementSpeed = walkValue;
     }
 
     public void MyUpdate(InputController.InputValues _inputValues)
     {
         inputValues = _inputValues;
         LookUpdate();
-        MovementUpdate();
     }
 
     public void LookUpdate()
@@ -57,9 +50,4 @@ public class MovementController : MonoBehaviour
         playerTransform.Rotate(Vector3.up * mouseX);
     }   
 
-    public void MovementUpdate()
-    {
-        //Vector3 moveVector = playerTransform.right * inputValues.horizontal * movementSpeed + playerTransform.forward * inputValues.vertical * movementSpeed;
-        //playerCharacterController.Move(moveVector);
-    }    
 }

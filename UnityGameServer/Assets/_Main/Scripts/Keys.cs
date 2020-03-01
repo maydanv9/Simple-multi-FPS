@@ -29,5 +29,8 @@ public class Keys
         public const string ANIMATION_SHOOT = "SHOOTING";
         public const string ANIMATION_IDLE = "IDLE";
     }
-
+     public class Tags
+    {
+        public const string PLAYER_TAG = "Player tag";
+    }
 }

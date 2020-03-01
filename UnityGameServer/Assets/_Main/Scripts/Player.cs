@@ -6,50 +6,59 @@ public class Player : MonoBehaviour
 {
     public struct InputValues
     {
-        public float mouseX;
-        public float mouseY;
         public float vertical;
         public float horizontal;
     }
 
+    [Header("Player data: ")]
     public int id;
     public string username;
 
-    public CharacterController controller;
+    [Header("Player stats: ")]
+    [SerializeField] private int playerHealth;
+    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private int playerArmor;
+    [SerializeField] private int maxArmor = 100;
+
+    [Header("Speed and movements: ")]
+    [SerializeField] private CharacterController controller;
+    [SerializeField] private float speed;
+    [SerializeField] private Transform shootOrigin;
+
     private float gravity = -20f;
-    public float speed;
     private float moveSpeed = .5f;
     private float runSpeed = 1f;
     private float crouchSpeed = .2f;
     private float jumpSpeed = 10f;
-
-    private string playerStatus;
-    public string PlayerStatus => playerStatus;
-
-    private string playerAnimation;
-    public string PlayerAnimation => playerAnimation;
-
-    private bool[] inputs;
     private float yVelocity = 0;
     private InputValues inputValues;
-    private void Start()
-    {
-        gravity *= Time.fixedDeltaTime * Time.fixedDeltaTime;
-        //moveSpeed *= Time.fixedDeltaTime;
-        jumpSpeed *= Time.fixedDeltaTime;
-    }
+    private bool[] inputs;
+    private int shootDistance = 20;
+    [Header("Animation status: ")]
+    [SerializeField] private string playerStatus;
+    [SerializeField] private string playerAnimation;
+
+    public string PlayerAnimation => playerAnimation;
+    public string PlayerStatus => playerStatus;
+    public int PlayerHealth => playerHealth;
 
     public void Initialize(int _id, string _username)
     {
+        jumpSpeed *= Time.fixedDeltaTime;
+        gravity *= Time.fixedDeltaTime * Time.fixedDeltaTime;
+
         id = _id;
         username = _username;
         inputValues = new InputValues();
         inputs = new bool[5];
+        playerHealth = maxHealth;
     }
 
     /// <summary>Processes player input and moves the player.</summary>
     public void FixedUpdate()
     {
+        if (playerHealth <= 0) return;
+
         Move(inputs, inputValues);
         Debug.Log("Player: " + id + " has status:" + playerStatus);
     }
@@ -118,11 +127,57 @@ public class Player : MonoBehaviour
     /// <summary>Updates the player input with newly received input.</summary>
     /// <param name="_inputs">The new key inputs.</param>
     /// <param name="_rotation">The new rotation.</param>
-    public void SetInput(bool[] _inputs, Quaternion _rotation, float[] _inputsFloats)
+    public void SetMovement(Quaternion _rotation, float[] _inputsFloats)
     {
         inputValues.vertical = _inputsFloats[0];
         inputValues.horizontal = _inputsFloats[1];
-        inputs = _inputs;
+        
         transform.rotation = _rotation;
+        Debug.DrawRay(transform.position, transform.forward * 10, Color.red);
+
+    }
+
+    public void SetInputs(bool[] _inputs)
+    {
+        inputs = _inputs;
+    }
+
+    public void Shoot(Vector3 _viewDirection)
+    {
+        if (Physics.Raycast(shootOrigin.position, _viewDirection, out RaycastHit _hit, shootDistance))
+        {
+            if (_hit.collider.CompareTag(Keys.Tags.PLAYER_TAG))
+            {
+                _hit.collider.GetComponent<Player>().TakeDamage(50);
+            }
+        }
+    }
+
+    public void TakeDamage(int _damage)
+    {
+        if (playerHealth <= 0f)
+        {
+            return;
+        }
+
+        playerHealth -= _damage;
+        if (playerHealth <= 0f)
+        {
+            controller.enabled = false;
+            transform.position = new Vector3(0f, 25f, 0f);
+            ServerSend.PlayerPosition(this);
+            StartCoroutine(Respawn());
+        }
+
+        ServerSend.PlayerHealth(this);
+    }
+
+    private IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(5f);
+
+        playerHealth = maxHealth;
+        controller.enabled = true;
+        ServerSend.PlayerRespawned(this);
     }
 }

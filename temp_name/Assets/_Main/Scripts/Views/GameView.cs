@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class GameView : BaseView {
 
-    [SerializeField] private Text mainText;
     public IGameView listener;
 
 

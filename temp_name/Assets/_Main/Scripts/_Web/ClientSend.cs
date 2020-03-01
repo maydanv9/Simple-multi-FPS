@@ -28,15 +28,10 @@ public class ClientSend : MonoBehaviour
         }
     }
 
-    public static void PlayerMovement(bool[] _inputs, float[] _inputsFloats)
+    public static void PlayerMovement(float[] _inputsFloats)
     {
         using (Packet _packet = new Packet((int)ClientPackets.playerMovement))
         {
-            _packet.Write(_inputs.Length);
-            foreach (bool _input in _inputs)
-            {
-                _packet.Write(_input);
-            }
 
             _packet.Write(_inputsFloats.Length);
             foreach (float _inputFloat in _inputsFloats)
@@ -47,6 +42,30 @@ public class ClientSend : MonoBehaviour
             _packet.Write(GameController.gameControllerInstance.PlayersController.players[Client.instance.myId].transform.rotation);
 
             SendUDPData(_packet);
+        }
+    }
+
+    public static void PlayerInputs(bool[] _inputs)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.playerInputs))
+        {
+            _packet.Write(_inputs.Length);
+            foreach (bool _input in _inputs)
+            {
+                _packet.Write(_input);
+            }
+
+            SendUDPData(_packet);
+        }
+    }
+
+    public static void PlayerShoot(Vector3 _facing)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.playerShoot))
+        {
+            _packet.Write(_facing);
+
+            SendTCPData(_packet);
         }
     }
     #endregion

@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public void MyUpdate(InputController.InputValues _inputValues)
     {
         movementController.MyUpdate(_inputValues);
-        Debug.DrawRay(transform.position, transform.forward * 2, Color.red);
+        Debug.DrawRay(transform.position, transform.forward * 10, Color.red);
         SendInputToServer(_inputValues);
     }
 
@@ -37,6 +37,12 @@ public class PlayerController : MonoBehaviour
             _inputValues.horizontal,
         };
 
-        ClientSend.PlayerMovement(_inputs, inputFloats);
+        ClientSend.PlayerInputs(_inputs);
+        ClientSend.PlayerMovement(inputFloats);
+
+        if (_inputValues.isLeftMousePressed)
+        {
+            ClientSend.PlayerShoot(playerCamera.transform.forward);
+        }
     }
 }

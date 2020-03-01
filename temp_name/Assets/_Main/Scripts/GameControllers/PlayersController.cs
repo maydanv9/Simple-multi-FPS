@@ -35,8 +35,12 @@ public class PlayersController : MonoBehaviour
 
 
         //TO DO: SORT OF INITATION
-        _player.GetComponent<PlayerInfoController>().id = _id;
-        _player.GetComponent<PlayerInfoController>().username = _username;
+        _player.GetComponent<PlayerInfoController>().SetServerInfo(_id, _username);
         players.Add(_id, _player.GetComponent<PlayerInfoController>());
+    }
+
+    public void RemovePlayer(int _id)
+    {
+        players.Remove(_id);
     }
 }

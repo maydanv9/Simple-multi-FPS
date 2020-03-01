@@ -2556,6 +2556,9 @@ MonoBehaviour:
   username: 
   playerAnimation: 
   playerStatus: 
+  playerHealth: 0
+  playerArmor: 0
+  playerMesh: {fileID: 2950677701130644474}
 --- !u!114 &6138138208022121740
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -46,7 +46,8 @@ public class ClientHandle : MonoBehaviour
         int _id = _packet.ReadInt();
         string _playerAnimation = _packet.ReadString();
         string _playerStatus = _packet.ReadString();
-        GameController.gameControllerInstance.PlayersController.players[_id].SetAnimation(_playerAnimation, _playerStatus);
+        string _playerWeapon = _packet.ReadString();
+        GameController.gameControllerInstance.PlayersController.players[_id].SetAnimation(_playerAnimation, _playerStatus, _playerWeapon);
     }
 
     public static void PlayerDisconnected(Packet _packet)

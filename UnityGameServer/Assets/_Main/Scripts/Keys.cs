@@ -14,22 +14,37 @@ public class Keys
         public const int IS_SHIFT_PPRESSED = 2;
         public const int IS_LMB_PPRESSED = 3;
         public const int IS_RMB_PPRESSED = 4;
+        public const int IS_ALPHA_1_PRESSED = 5;
+        public const int IS_ALPHA_2_PRESSED = 6;
+        public const int IS_ALPHA_3_PRESSED = 7;
+        public const int IS_ALPHA_4_PRESSED = 8;
     }
 
-    public class PlayerStatus
+    public class PlayerMovement
     {
         public const string ANIMATION_WALKING = "WALKING";
         public const string ANIMATION_RUNNING = "RUNNING";
         public const string ANIMATION_JUMPING = "JUMPING";
         public const string ANIMATION_CROUCHING = "CROUCHING";
+        public const string ANIMATION_IDLE = "IDLE";
     }
 
-    public class PlayerAnimation
+    public class PlayerAction
     {
         public const string ANIMATION_SHOOT = "SHOOTING";
         public const string ANIMATION_IDLE = "IDLE";
+        public const string ANIMATION_AIM = "AIM";
     }
-     public class Tags
+
+    public class PlayerWeapon
+    {
+        public const string WEAPON_KNIFE = "KNIFE";
+        public const string WEAPON_PISTOL = "PISTOL";
+        public const string WEAPON_RIFLE = "RIFLE";
+        public const string WEAPON_GRENADE = "GRENADE";
+    }
+
+    public class Tags
     {
         public const string PLAYER_TAG = "Player tag";
     }

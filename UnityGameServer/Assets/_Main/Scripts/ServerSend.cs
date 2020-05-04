@@ -134,8 +134,9 @@ public class ServerSend
         using (Packet _packet = new Packet((int)ServerPackets.playerAnimation))
         {
             _packet.Write(_player.id);
-            _packet.Write(_player.PlayerAnimation);
-            _packet.Write(_player.PlayerStatus);
+            _packet.Write(_player.PlayerActionStatus);
+            _packet.Write(_player.PlayerMovementStatus);
+            _packet.Write(_player.PlayerWeaponStatus);
             SendUDPDataToAll(_packet);
         }
     }

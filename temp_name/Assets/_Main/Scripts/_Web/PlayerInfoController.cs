@@ -9,15 +9,17 @@ public class PlayerInfoController : MonoBehaviour
     [SerializeField] private string username;
 
     [Header("Player stats info: ")]
-    [SerializeField] private string playerAnimation;
-    [SerializeField] private string playerStatus;
+    [SerializeField] private string playerMovement;
+    [SerializeField] private string playerAction;
+    [SerializeField] private string playerWeapon;
     [SerializeField] private int playerHealth;
     [SerializeField] private int playerArmor;
     [SerializeField] private int max = 100;
 
     [Header("Player model info: ")]
     [SerializeField] private SkinnedMeshRenderer playerMesh;
-
+    [SerializeField] private Animator animator;
+    public bool hasGun = false;
     public void SetServerInfo(int _id, string _username)
     {
         id = _id;
@@ -25,10 +27,7 @@ public class PlayerInfoController : MonoBehaviour
         playerArmor = 100;
         playerHealth = 100;
     }
-    private void Update()
-    {
-        Debug.Log(playerHealth);
-    }
+
     public void SetHealth(int _hp, int _armor)
     {
         playerHealth = _hp;
@@ -40,10 +39,49 @@ public class PlayerInfoController : MonoBehaviour
         }
     }
 
-    public void SetAnimation(string _playerAnimation, string _playerStatus)
+    public void SetAnimation(string _playerAction, string _playerMovement, string _playerWeapon)
     {
-        playerAnimation = _playerAnimation;
-        playerStatus = _playerStatus;
+        playerMovement = _playerMovement;
+        playerAction = _playerAction;
+        playerWeapon = _playerWeapon;
+
+        switch (playerWeapon)
+        {
+            case "SHOOTING":
+                break;
+            case "AIM":
+                break;
+            default:
+                //animator.SetFloat("Action", 0f);
+                break;
+        }
+
+        switch (playerAction)
+        {
+            case "SHOOTING":
+                break;
+            case "AIM":
+                break;
+            default:
+                //animator.SetFloat("Action", 0f);
+                break;
+        }
+
+        switch (playerMovement)
+        {
+            case "WALKING":
+                animator.SetFloat("Speed", 0.5f);
+                break;
+            case "RUNNING":
+                animator.SetFloat("Speed", 1f);
+                break;
+            default:
+                animator.SetFloat("Speed", 0f);
+                break;
+
+        }
+
+
     }
 
     public void Die()

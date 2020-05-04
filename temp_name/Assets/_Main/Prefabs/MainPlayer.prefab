@@ -46,11 +46,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   username: 
-  playerAnimation: 
-  playerStatus: 
+  playerMovement: 
+  playerAction: 
   playerHealth: 0
   playerArmor: 0
+  max: 100
   playerMesh: {fileID: 4658515999067815184}
+  animator: {fileID: 4658515999063697240}
+  hasGun: 0
 --- !u!1 &4658515999056248326
 GameObject:
   m_ObjectHideFlags: 0
@@ -2169,7 +2172,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4658515999056343554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4658515999056583026}

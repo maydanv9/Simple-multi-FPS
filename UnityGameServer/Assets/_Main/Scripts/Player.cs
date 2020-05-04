@@ -24,22 +24,28 @@ public class Player : MonoBehaviour
     [SerializeField] private CharacterController controller;
     [SerializeField] private float speed;
     [SerializeField] private Transform shootOrigin;
-
+    public bool isGrounded => controller.isGrounded;
+    public bool isGrounded1;
     private float gravity = -20f;
-    private float moveSpeed = .5f;
-    private float runSpeed = 1f;
-    private float crouchSpeed = .2f;
+    private float moveSpeed = .08f;
+    private float runSpeed = .15f;
+    private float crouchSpeed = .05f;
     private float jumpSpeed = 10f;
     private float yVelocity = 0;
     private InputValues inputValues;
     private bool[] inputs;
     private int shootDistance = 20;
     [Header("Animation status: ")]
-    [SerializeField] private string playerStatus;
-    [SerializeField] private string playerAnimation;
-
-    public string PlayerAnimation => playerAnimation;
-    public string PlayerStatus => playerStatus;
+    [SerializeField] private string playerMovementStatus;
+    [SerializeField] private string playerActionStatus;
+    [SerializeField] private string playerWeaponStatus;
+    //[Header("Weapon: ")]
+    //to do weapon
+    //switch 1.2.3,4 to weapon type
+    //header EQ
+    public string PlayerActionStatus => playerActionStatus;
+    public string PlayerMovementStatus => playerMovementStatus;
+    public string PlayerWeaponStatus => playerWeaponStatus;
     public int PlayerHealth => playerHealth;
 
     public void Initialize(int _id, string _username)
@@ -50,7 +56,7 @@ public class Player : MonoBehaviour
         id = _id;
         username = _username;
         inputValues = new InputValues();
-        inputs = new bool[5];
+        inputs = new bool[9];
         playerHealth = maxHealth;
     }
 
@@ -58,15 +64,15 @@ public class Player : MonoBehaviour
     public void FixedUpdate()
     {
         if (playerHealth <= 0) return;
-
         Move(inputs, inputValues);
-        Debug.Log("Player: " + id + " has status:" + playerStatus);
+        Debug.Log("Player: " + id + " has status:" + playerMovementStatus);
     }
 
     /// <summary>Calculates the player's desired movement direction and moves him.</summary>
     /// <param name="_inputDirection"></param>
     private void Move(bool[] _inputs, InputValues inputValues)
     {
+        if (playerHealth <= 0) return;
         PlayerStatusCheck(_inputs);
 
         Vector3 moveVector = transform.right * inputValues.horizontal * speed + transform.forward * inputValues.vertical * speed;
@@ -97,31 +103,37 @@ public class Player : MonoBehaviour
         if (_inputs[Keys.Controls.IS_SHIFT_PPRESSED])
         {
             speed = runSpeed;
-            playerStatus = Keys.PlayerStatus.ANIMATION_RUNNING;
+            playerMovementStatus = Keys.PlayerMovement.ANIMATION_RUNNING;
         }
         else if (_inputs[Keys.Controls.IS_CTRL_PPRESSED])
         {
             speed = crouchSpeed;
-            playerStatus = Keys.PlayerStatus.ANIMATION_CROUCHING;
+            playerMovementStatus = Keys.PlayerMovement.ANIMATION_CROUCHING;
         }
         else
         {
             speed = moveSpeed;
-            playerStatus = Keys.PlayerStatus.ANIMATION_WALKING;
-        } 
+            playerMovementStatus = Keys.PlayerMovement.ANIMATION_WALKING;
+        }
 
         if (inputValues.horizontal == 0 && inputValues.vertical == 0)
         {
-            playerAnimation = Keys.PlayerAnimation.ANIMATION_IDLE;
-            playerStatus = Keys.PlayerStatus.ANIMATION_WALKING;
-            speed = moveSpeed;
+            speed = 0;
+            playerMovementStatus = Keys.PlayerMovement.ANIMATION_IDLE;
         }
 
         //CHECK MOUSE
         if (_inputs[Keys.Controls.IS_LMB_PPRESSED])
         {
-            playerAnimation = Keys.PlayerAnimation.ANIMATION_SHOOT;
-        } else playerAnimation = Keys.PlayerAnimation.ANIMATION_IDLE;
+            playerActionStatus = Keys.PlayerAction.ANIMATION_SHOOT;
+        }
+        else playerActionStatus = Keys.PlayerAction.ANIMATION_IDLE;
+
+        //WEAPON KEYS
+        if (_inputs[Keys.Controls.IS_ALPHA_1_PRESSED]) { playerWeaponStatus = Keys.PlayerWeapon.WEAPON_KNIFE; }
+        else if (_inputs[Keys.Controls.IS_ALPHA_2_PRESSED]) { playerWeaponStatus = Keys.PlayerWeapon.WEAPON_PISTOL; }
+        else if (_inputs[Keys.Controls.IS_ALPHA_3_PRESSED]) { playerWeaponStatus = Keys.PlayerWeapon.WEAPON_RIFLE; }
+        else if (_inputs[Keys.Controls.IS_ALPHA_4_PRESSED]) { playerWeaponStatus = Keys.PlayerWeapon.WEAPON_GRENADE; }
     }
 
     /// <summary>Updates the player input with newly received input.</summary>

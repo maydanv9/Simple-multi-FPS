@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameState : BaseState, IGameView, IMovement
 {
@@ -10,30 +11,33 @@ public class GameState : BaseState, IGameView, IMovement
     public override void InitState(GameController gameController)
     {
         base.InitState(gameController);
+
         #region LISTENERS
-        this.gameController.UIController.GameView.listener = this;
-        this.gameController.InputController.movementlistener = this;
+        gameController.UIController.GameView.listener = this;
+        gameController.InputController.movementlistener = this;
         #endregion 
-        this.gameController.UIController.GameView.ShowView();
-        this.gameController.SceneReferences.GameTerrain.SetActive(true);
-        this.gameController.MovementController.Init(gameController);
+
+        gameController.UIController.GameView.ShowView();
+        gameController.WebController.Client.Init(gameController);
+        gameController.WebController.Client.ConnectToServer();
+        gameController.MovementController.Init(gameController);
+        gameController.PlayersController.Init(gameController);
     }
 
     public override void UpdateState(GameController gameController)
     {
         gameController.InputController.InputUpdate();
-        gameController.MovementController.MovementUpdate(inputs);
-        gameController.MovementController.LookUpdate(inputs);
+        gameController.PlayersController.LocalPlayer?.MyUpdate(inputs);
     }
 
     public override void DeinitState(GameController gameController)
     {
         base.DeinitState(gameController);
         #region LISTENERS
-        this.gameController.UIController.GameView.listener = this;
-        this.gameController.InputController.movementlistener = this;
+        gameController.UIController.GameView.listener = this;
+        gameController.InputController.movementlistener = this;
         #endregion 
-        this.gameController.UIController.GameView.HideView();
+        gameController.UIController.GameView.HideView();
     }
 
     public void SetMenuState()

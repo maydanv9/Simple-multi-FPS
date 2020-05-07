@@ -13,16 +13,18 @@ public class MovementController : MonoBehaviour
     [Header("Main")]
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform mainCamera;
-    [SerializeField] private CharacterController playerCharacterController;
 
     private GameController gameController;
     private InputController.InputValues inputValues;
 
-    private float walkValue;
-    private float sprintValue;
-    private float yClamp;
     private float mouseSensitivity = 100f;
     private float xRotation = 0;
+
+    public MovementController(Transform _playerTransform, Transform _mainCamera)
+    {
+        playerTransform = _playerTransform;
+        mainCamera = _mainCamera;
+    }
 
     public void Init(GameController _gameController)
     {
@@ -30,10 +32,14 @@ public class MovementController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    public void LookUpdate(InputController.InputValues _inputValues)
+    public void MyUpdate(InputController.InputValues _inputValues)
     {
         inputValues = _inputValues;
+        LookUpdate();
+    }
 
+    public void LookUpdate()
+    {
         float mouseY = inputValues.mouseY * mouseSensitivity * Time.deltaTime;
         float mouseX = inputValues.mouseX * mouseSensitivity * Time.deltaTime;
 
@@ -44,21 +50,4 @@ public class MovementController : MonoBehaviour
         playerTransform.Rotate(Vector3.up * mouseX);
     }   
 
-    public void MovementUpdate(InputController.InputValues _inputValues)
-    {
-        inputValues = _inputValues;
-
-        Vector3 moveVector = playerTransform.right * inputValues.horizontal + playerTransform.forward * inputValues.vertical;
-        playerCharacterController.Move(moveVector);
-    }
-
-    
-
-    private void CheckInput()
-    {
-        if (inputValues.isLeftMousePressed)
-        {
-
-        }
-    }
 }

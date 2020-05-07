@@ -19,4 +19,23 @@ public class Keys : MonoBehaviour
         public static string DEFAULT_TAG = "Untagged";
         public static string INTERACTABLE_TAG = "Interactable";
     }
+
+    public static class Scenes
+    {
+        public static string TERRAIN_SCENE = "GameTerrain";
+    }
+    public class PlayerStatus
+    {
+        public const string ANIMATION_WALKING = "WALKING";
+        public const string ANIMATION_RUNNING = "RUNNING";
+        public const string ANIMATION_JUMPING = "JUMPING";
+        public const string ANIMATION_CROUCHING = "CROUCHING";
+    }
+
+    public class PlayerAnimation
+    {
+        public const string ANIMATION_SHOOT = "SHOOTING";
+        public const string ANIMATION_IDLE = "IDLE";
+        public const string ANIMATION_AIM = "AIM";
+    }
 }

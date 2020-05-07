@@ -47,9 +47,11 @@ public class PlayerInfoController : MonoBehaviour
 
         switch (playerWeapon)
         {
-            case "SHOOTING":
+            case "PISTOL":
+                animator.SetFloat("Gun", 0f);
                 break;
-            case "AIM":
+            case "RIFLE":
+                animator.SetFloat("Gun", 1f);
                 break;
             default:
                 //animator.SetFloat("Action", 0f);

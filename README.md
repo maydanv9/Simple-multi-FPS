@@ -1,4 +1,4 @@
-# temp_name
+# Simple multi FPS
 Simple project of multiplayer FPS game with local server.
 
 Game has implemented basic blend tree with animations, shooting and respawn system.

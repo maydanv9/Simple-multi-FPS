@@ -3,14 +3,23 @@
 # =============== #
 /New Unity Project/
 /temp_name/[Ll]ibrary/
+/UnityGameServer/[Ll]ibrary/
 /temp_name/[Tt]emp/
+/UnityGameServer/[Tt]emp/
 /temp_name/[Oo]bj/
+/UnityGameServer/[Oo]bj/
 /temp_name/[Bb]uild/
+/UnityGameServer/[Bb]uild/
 /temp_name/[Bb]uilds/
+/UnityGameServer/[Bb]uilds/
 /temp_name/[Ll]ogs/
+/UnityGameServer/[Ll]ogs/
+!/UnityGameServer/[Aa]ssets/**/*.meta
 !/temp_name/[Aa]ssets/**/*.meta
 /temp_name/Assets/AssetStoreTools*
+/UnityGameServer/Assets/AssetStoreTools*
 /temp_name/UnityPackageManager
+/UnityGameServer/UnityPackageManager
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
@@ -37,6 +46,7 @@
 # Gradle cache directory #
 # ====================== #
 /temp_name/.gradle/
+/UnityGameServer/.gradle/
 
 # ============================= #
 # Unity3D generated meta files  #
@@ -86,6 +96,10 @@ ehthumbs.db
 #    Whiteboard   #
 # =============== #
 temp_name/.vs/temp_name/v15/Server/sqlite3/storage.ide
+UnityGameServer/.vs/temp_name/v15/Server/sqlite3/storage.ide
 temp_name/.vs/temp_name/v15/Server/sqlite3/storage.ide-wal
+UnityGameServer/.vs/temp_name/v15/Server/sqlite3/storage.ide-wal
 temp_name/.vs/temp_name/v15/Server/sqlite3/storage.ide-shm
+UnityGameServer/.vs/temp_name/v15/Server/sqlite3/storage.ide-shm
 temp_name/.vs/temp_name/DesignTimeBuild/.dtbcache
+UnityGameServer/.vs/temp_name/DesignTimeBuild/.dtbcache

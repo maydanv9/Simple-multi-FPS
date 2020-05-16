@@ -43,10 +43,5 @@ public class PlayerController : MonoBehaviour
 
         ClientSend.PlayerInputs(_inputs);
         ClientSend.PlayerMovement(inputFloats);
-
-        if (_inputValues.isLeftMousePressed)
-        {
-            ClientSend.PlayerShoot(playerCamera.transform.forward);
-        }
     }
 }

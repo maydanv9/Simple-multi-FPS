@@ -11,10 +11,8 @@ public enum ServerPackets
     spawnPlayer,
     playerPosition,
     playerRotation,
-    playerAnimation,
     playerDisconnected,
-    playerHealth,
-    playerRespawned
+    playerRespawned,
 }
 
 /// <summary>Sent from client to server.</summary>
@@ -23,7 +21,6 @@ public enum ClientPackets
     welcomeReceived = 1,
     playerMovement,
     playerInputs,
-    playerShoot
 }
 
 public class Packet : IDisposable

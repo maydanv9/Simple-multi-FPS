@@ -129,18 +129,6 @@ public class ServerSend
         }
     }
 
-    public static void PlayerAnimation(Player _player)
-    {
-        using (Packet _packet = new Packet((int)ServerPackets.playerAnimation))
-        {
-            _packet.Write(_player.id);
-            _packet.Write(_player.PlayerActionStatus);
-            _packet.Write(_player.PlayerMovementStatus);
-            _packet.Write(_player.PlayerWeaponStatus);
-            SendUDPDataToAll(_packet);
-        }
-    }
-
     public static void PlayerDisconnected(int _playerId)
     {
         using (Packet _packet = new Packet((int)ServerPackets.playerDisconnected))
@@ -150,26 +138,5 @@ public class ServerSend
             SendTCPDataToAll(_packet);
         }
     }
-    public static void PlayerHealth(Player _player)
-    {
-        using (Packet _packet = new Packet((int)ServerPackets.playerHealth))
-        {
-            _packet.Write(_player.id);
-            _packet.Write(_player.PlayerHealth);
-
-            SendTCPDataToAll(_packet);
-        }
-    }
-
-    public static void PlayerRespawned(Player _player)
-    {
-        using (Packet _packet = new Packet((int)ServerPackets.playerRespawned))
-        {
-            _packet.Write(_player.id);
-
-            SendTCPDataToAll(_packet);
-        }
-    }
-
     #endregion
 }

@@ -41,14 +41,6 @@ public class ClientHandle : MonoBehaviour
         GameController.gameControllerInstance.PlayersController.players[_id].transform.rotation = _rotation; 
     }
 
-    public static void PlayerAnimation(Packet _packet)
-    {
-        int _id = _packet.ReadInt();
-        string _playerAnimation = _packet.ReadString();
-        string _playerStatus = _packet.ReadString();
-        string _playerWeapon = _packet.ReadString();
-        GameController.gameControllerInstance.PlayersController.players[_id].SetAnimation(_playerAnimation, _playerStatus, _playerWeapon);
-    }
 
     public static void PlayerDisconnected(Packet _packet)
     {
@@ -56,18 +48,5 @@ public class ClientHandle : MonoBehaviour
 
         Destroy(GameController.gameControllerInstance.PlayersController.players[_id].gameObject);
         GameController.gameControllerInstance.PlayersController.RemovePlayer(_id);
-    }
-
-    public static void PlayerHealth(Packet _packet)
-    {
-        int _id = _packet.ReadInt();
-        int _health = _packet.ReadInt();
-        GameController.gameControllerInstance.PlayersController.players[_id].SetHealth(_health, 0);
-    }
-
-    public static void PlayerRespawned(Packet _packet)
-    {
-        int _id = _packet.ReadInt();
-        GameController.gameControllerInstance.PlayersController.players[_id].Respawn();
     }
 }

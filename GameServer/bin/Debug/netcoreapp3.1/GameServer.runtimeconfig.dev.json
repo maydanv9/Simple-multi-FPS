@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "C:\\Users\\Maydan\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\Maydan\\.nuget\\packages"
-    ]
-  }
-}
